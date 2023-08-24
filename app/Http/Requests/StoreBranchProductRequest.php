@@ -28,7 +28,7 @@ class StoreBranchProductRequest extends FormRequest
             'stock'          => '',
             'order_product'   => '',
             'branch_id'      => '',
-            'category_id'    => ''
+            'product_id'    => ''
         ];
     }
 }

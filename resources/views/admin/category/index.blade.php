@@ -9,9 +9,9 @@
             <h3>Listado de categorias <a href="category/create"><button class="btn btn-success"><i class="fa fa-plus"></i>&nbsp;&nbsp; Agregar categoria</button></a>
                 <a href="{{ route('branch.index') }}" class="btn btn-limon"><i class="fas fa-undo-alt mr-2"></i>Regresar</a>
                 @if (Auth::user()->role_id == 1)
-                    <a href="categoryImport" class="btn btn-success"><i class="fa fa-plus"></i> Importar Categorias</a>
+                    <a href="categoryImport" class="btn btn-success"><i class="fa fa-plus"></i> Importar Categorias excel</a>
                 @endif
-            </h3>
+
         </div>
     </div>
     <div class="row">

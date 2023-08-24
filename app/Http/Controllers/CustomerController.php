@@ -5,14 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use App\Http\Requests\StoreCustomerRequest;
 use App\Http\Requests\UpdateCustomerRequest;
+use App\Imports\CustomerImport;
 use App\Models\Department;
 use App\Models\Document;
 use App\Models\Liability;
 use App\Models\Municipality;
 use App\Models\Organization;
 use App\Models\Regime;
-use App\Models\Tax;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\DataTables;
 
 class CustomerController extends Controller
@@ -71,6 +72,11 @@ class CustomerController extends Controller
         return view('admin.customer.create', compact('departments', 'municipalities', 'documents', 'liabilities', 'organizations', 'regimes'));
     }
 
+    public function createImport()
+    {
+        return view('admin.customer.import');
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -106,6 +112,16 @@ class CustomerController extends Controller
         else{
             return redirect("customer");
         }
+    }
+
+    public function import(Request $request)
+    {
+        $customer = $request->file('customer');
+        Excel::import(new CustomerImport, $customer);
+
+        $message = 'Importacion de Clientes realizada con exito';
+        toast($message,'success');
+        return redirect('customer');
     }
 
     /**

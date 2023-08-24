@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Supplier;
 use App\Http\Requests\StoreSupplierRequest;
 use App\Http\Requests\UpdateSupplierRequest;
+use App\Imports\SupplierImport;
 use App\Models\Department;
 use App\Models\Document;
 use App\Models\Liability;
@@ -12,6 +13,7 @@ use App\Models\Municipality;
 use App\Models\Organization;
 use App\Models\Regime;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\DataTables;
 
@@ -65,6 +67,11 @@ class SupplierController extends Controller
         return view('admin.supplier.create', compact('departments', 'municipalities', 'documents', 'liabilities', 'organizations', 'regimes'));
     }
 
+    public function createImport()
+    {
+        return view('admin.supplier.import');
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -112,6 +119,18 @@ class SupplierController extends Controller
         else{
             return redirect('supplier');
         }
+    }
+
+    public function import(Request $request)
+    {
+        $supplier = $request->file('supplier_file');
+        Excel::import(new SupplierImport, $supplier);
+
+        $message = 'Importacion de Proveedores realizada con exito';
+        //Alert::success('Categoria', $message);
+        toast($message,'success');
+        //Alert::success('Categoria','Creada Satisfactoriamente.');
+        return redirect('supplier');
     }
 
     /**

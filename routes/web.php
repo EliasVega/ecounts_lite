@@ -170,7 +170,7 @@ Route::post('branch/logout', [BranchController::class, 'logout'])->name('logout_
 Route::resource('cash_receipt', CashReceiptController::class);
 
 Route::get('categoryImport', [CategoryController::class, 'createImport'])->name('categoryImport');
-Route::post('storeCategory', [CategoryController::class, 'storeCategory'])->name('storeCategory');
+Route::post('importCategory', [CategoryController::class, 'import'])->name('importCategory');
 
 Route::get('company/create/{id}', [CompanyController::class, 'getMunicipalities']);
 Route::post('company/logout', [CompanyController::class, 'logout'])->name('logout_company');
@@ -179,6 +179,8 @@ Route::get('co_municipality/co_department/{id}', [CoMunicipalityController::clas
 
 Route::get('customer/create/{id}', [CustomerController::class, 'getProducts']);
 Route::get('customer/create/{id}', [CustomerController::class, 'getMunicipalities']);
+Route::get('customerImport', [CustomerController::class, 'createImport'])->name('customerImport');
+Route::post('importCustomer', [CustomerController::class, 'import'])->name('importCustomer');
 
 Route::get('expense/show_pay_expense/{id}', [ExpenseController::class, 'show_pay_expense'])->name('show_pay_expense');
 Route::get('expense/create/{id}', [ExpenseController::class, 'getMunicipalities']);
@@ -243,6 +245,8 @@ Route::get('pdfPrePurchase', [PrePurchaseController::class, 'pdfPrePurchase'])->
 Route::get('postPrePurchase', [PrePurchaseController::class, 'postPrePurchase'])->name('postPrePurchase');
 
 Route::get('prosuc/crate/{id}', [ProductBranchController::class, 'getProducts']);
+Route::get('productImport', [ProductController::class, 'createImport'])->name('productImport');
+Route::post('importProduct', [ProductController::class, 'import'])->name('importProduct');
 
 Route::get('show_ndpurchase/{id}', [PurchaseController::class, 'show_ndpurchase'])->name('show_ndpurchase');
 Route::get('show_ncpurchase/{id}', [PurchaseController::class, 'show_ncpurchase'])->name('show_ncpurchase');
@@ -271,6 +275,8 @@ Route::get('subaccount/getAccount/{id}', [ SubaccountController::class, 'getAcco
 Route::get('subaccount/getSubaccount/{id}', [SubaccountController::class, 'getSubaccounts'])->name('getSubaccount');
 
 Route::get('supplier/create/{id}', [SupplierController::class, 'getMunicipalities']);
+Route::get('supplierImport', [SupplierController::class, 'createImport'])->name('supplierImport');
+Route::post('importSupplier', [SupplierController::class, 'import'])->name('importSupplier');
 
 Route::get('unitMeasure/status/{id}', [UnitMeasureController::class, 'status'])->name('unitStatus');
 

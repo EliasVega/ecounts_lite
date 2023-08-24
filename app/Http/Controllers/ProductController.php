@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Imports\ProductImport;
 use App\Models\Branch_product;
 use App\Models\Category;
 use App\Models\Unit_measure;
+use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ProductController extends Controller
 {
@@ -41,6 +44,11 @@ class ProductController extends Controller
         $measures = Unit_measure::where('status', 'activo')->get();
 
         return view("admin.product.create", compact('categories', 'measures'));
+    }
+
+    public function createImport()
+    {
+        return view('admin.product.import');
     }
 
     /**
@@ -85,6 +93,16 @@ class ProductController extends Controller
         $branch_product->order_product = 0;
         $branch_product->save();
 
+        return redirect('product');
+    }
+
+    public function import(Request $request)
+    {
+        $product = $request->file('product');
+        Excel::import(new ProductImport, $product);
+
+        $message = 'Importacion de Productos realizada con exito';
+        toast($message,'success');
         return redirect('product');
     }
 

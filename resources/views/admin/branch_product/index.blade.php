@@ -8,6 +8,9 @@
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <h4>Listado de Productos sede
                 <a href="{{ route('branch.index') }}" class="btn btn-redeco"><i class="fas fa-undo-alt mr-2"></i>Regresar</a>
+                @if (Auth::user()->role_id == 1)
+                    <a href="branch_product/create" class="btn btn-success"><i class="fa fa-plus"></i> Importar Productos a sucursal</a>
+                @endif
             </h4>
         </div>
     </div>

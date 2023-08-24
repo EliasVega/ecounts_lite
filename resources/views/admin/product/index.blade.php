@@ -6,9 +6,12 @@
 <main class="main">
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <h3>Listado de Productos <a href="product/create"><button class="btn btn-celeste"><i class="fa fa-plus"></i>&nbsp;&nbsp; Agregar Producto</button></a>
+            <h4>Listado de Productos <a href="product/create"><button class="btn btn-celeste"><i class="fa fa-plus"></i>&nbsp;&nbsp; Agregar Producto</button></a>
                 <a href="{{ route('branch.index') }}" class="btn btn-gris"><i class="fas fa-undo-alt mr-2"></i>Regresar</a>
-                </h3>
+                @if (Auth::user()->role_id == 1)
+                    <a href="productImport" class="btn btn-success"><i class="fa fa-plus"></i> Importar Productos</a>
+                @endif
+            </h4>
         </div>
     </div>
     <div class="row">

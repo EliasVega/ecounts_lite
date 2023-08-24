@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Branch_product;
 use App\Http\Requests\StoreBranchProductRequest;
 use App\Http\Requests\UpdateBranchProductRequest;
+use App\Imports\Branch_productImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\DataTables;
 
 class BranchProductController extends Controller
@@ -77,7 +79,7 @@ class BranchProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.branch_product.create');
     }
 
     /**
@@ -86,9 +88,14 @@ class BranchProductController extends Controller
      * @param  \App\Http\Requests\StoreBranchProductRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreBranchProductRequest $request)
+    public function store(Request $request)
     {
-        //
+        $branchProducts = $request->file('bps');
+        Excel::import(new Branch_productImport, $branchProducts);
+
+        $message = 'Importacion de Productos a sucursal realizado con exito';
+        toast($message,'success');
+        return redirect('branch_product');
     }
 
     /**

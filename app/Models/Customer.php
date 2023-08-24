@@ -15,7 +15,7 @@ class Customer extends Model
         'address',
         'phone',
         'email',
-        'credit_lmit',
+        'credit_limit',
         'used',
         'available',
         'department_id',

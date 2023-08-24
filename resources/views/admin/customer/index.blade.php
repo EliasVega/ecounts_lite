@@ -10,6 +10,9 @@
             <h4>Listado de Clientes
                 <a href="customer/create" class="btn btn-celeste btn-sm"><i class="fa fa-plus mr-2"></i> Agregar Cliente</a>
                 <a href="{{ route('branch.index') }}" class="btn btn-bluR btn-sm"><i class="fas fa-undo-alt mr-2"></i>Regresar</a>
+                @if (Auth::user()->role_id == 1)
+                    <a href="customerImport" class="btn btn-success"><i class="fa fa-plus"></i> Importar Clientes</a>
+                @endif
             </h4>
         </div>
     </div>

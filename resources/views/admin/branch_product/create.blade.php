@@ -7,8 +7,8 @@
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="box-danger">
             <div class="box-header with-border">
-                <h4 class="box-title">Agregar Categoria
-                        <a href="{{ route('category.index') }}" class="btn btn-lightBlueGrad btn-sm ml-3"><i class="fas fa-undo-alt mr-2"></i>Regresar</a>
+                <h4 class="box-title">Agregar Productos a Sucursal
+                        <a href="{{ route('branch_product.index') }}" class="btn btn-lightBlueGrad btn-sm ml-3"><i class="fas fa-undo-alt mr-2"></i>Regresar</a>
                         <a href="{{ route('branch.index') }}" class="btn btn-blueGrad btn-sm ml-3"><i class="fas fa-undo-alt mr-2"></i>Inicio</a>
                 </h4>
             </div>
@@ -21,9 +21,9 @@
                     </ul>
                 </div>
             @endif
-            <form action="{{route('importCategory')}}" method="POST" enctype="multipart/form-data">
+            <form action="{{route('branch_product.store')}}" method="POST" enctype="multipart/form-data">
                 {{csrf_field()}}
-                <input type="file" name="category_file"/>
+                <input type="file" name="bps"/>
                 <button class="btn btn-primary" type="submit">Importar</button>
             </form>
         </div>

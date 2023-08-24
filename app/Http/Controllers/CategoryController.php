@@ -64,13 +64,15 @@ class CategoryController extends Controller
         return redirect('category');
     }
 
-    public function storeCategory(Request $request)
+    public function import(Request $request)
     {
-        $category = $request->file('category');
+        $category = $request->file('category_file');
         Excel::import(new CategoryImport, $category);
 
         $message = 'Importacion de Categorias realizada con exito';
+        //Alert::success('Categoria', $message);
         toast($message,'success');
+        //Alert::success('Categoria','Creada Satisfactoriamente.');
         return redirect('category');
     }
 
