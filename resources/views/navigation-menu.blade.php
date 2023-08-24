@@ -153,6 +153,15 @@
             <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            @if (Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                <x-responsive-nav-link href="{{ route('company.index') }}" :active="request()->routeIs('Ecounts')">
+                    {{ __('Ecounts') }}
+                </x-responsive-nav-link>
+            @else
+                <x-responsive-nav-link href="{{ route('branch.index') }}" :active="request()->routeIs('Ecounts')">
+                    {{ __('Ecounts') }}
+                </x-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->
