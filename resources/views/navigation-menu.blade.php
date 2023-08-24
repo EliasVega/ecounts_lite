@@ -16,6 +16,17 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    @if (Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
+                        <x-nav-link href="{{ route('company.index') }}" :active="request()->routeIs('Ecounts')">
+                            {{ __('Ecounts') }}
+                        </x-nav-link>
+                    @else
+                        <x-nav-link href="{{ route('branch.index') }}" :active="request()->routeIs('Ecounts')">
+                            {{ __('Ecounts') }}
+                        </x-nav-link>
+                    @endif
+                </div>
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
