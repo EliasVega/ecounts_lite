@@ -21,6 +21,7 @@
                     <thead>
                         <tr class="bg-info">
                             <th>Id</th>
+                            <th>Imagen</th>
                             <th>Codigo</th>
                             <th>Nombre</th>
                             <th>Precio_compra</th>
@@ -50,6 +51,17 @@
             columns:
             [
                 {data: 'id'},
+                {data: 'image',
+                    'sortable': false,
+                    'searchable': false,
+                    'render': function (image) {
+                    if (!image) {
+                        return 'N/A';
+                    } else {
+                        var img = image;
+                        return '<img src="' + img + '" height="50px" width="50px" />';
+                    }
+                }},
                 {data: 'code'},
                 {data: 'name'},
                 {data: 'price', className: 'dt-body-right', render: $.fn.dataTable.render.number( '.', ',', 2, '$')},

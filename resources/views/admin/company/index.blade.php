@@ -23,23 +23,23 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($companies as $com)
+                    @foreach($companies as $company)
                         <tr>
-                            <td>{{ $com->id }}</td>
-                            <td>{{ $com->department->name }}</td>
-                            <td>{{ $com->municipality->name }}</td>
-                            <td>{{ $com->name }}</td>
-                            <td>{{ $com->nit }}</td>
-                            <td>{{ $com->dv }}</td>
+                            <td>{{ $company->id }}</td>
+                            <td>{{ $company->department->name }}</td>
+                            <td>{{ $company->municipality->name }}</td>
+                            <td>{{ $company->name }}</td>
+                            <td>{{ $company->nit }}</td>
+                            <td>{{ $company->dv }}</td>
                             <td>
-                                <img src="{{ $com->logo }}" alt="{{ $com->name }}" style="height:60px; width:80px;" class="img-thumbnail">
+                                <img src="{{ asset($company->logo) }}" alt="{{ $company->name }}" style="height:60px; width:80px;" class="img-thumbnail">
                             </td>
                             @if (Auth::user()->role_id == 1)
                             <td>
-                                <a href="{{ route('company.show', $com->id) }}" class="btn btn-info btn-sm"> <i class="fa fa-indent"></i> Ingresar </a>
+                                <a href="{{ route('company.show', $company->id) }}" class="btn btn-info btn-sm"> <i class="fa fa-indent"></i> Ingresar </a>
                             </td>
                             <td>
-                                <a href="{{ route('company.edit', $com->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> Editar</a>
+                                <a href="{{ route('company.edit', $company->id) }}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i> Editar</a>
                             </td>
                             @endif
                         </tr>

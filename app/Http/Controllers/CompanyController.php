@@ -10,10 +10,10 @@ use App\Models\Liability;
 use App\Models\Municipality;
 use App\Models\Organization;
 use App\Models\Regime;
-use App\Models\Tax;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class CompanyController extends Controller
 {
@@ -102,8 +102,8 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
-        \Session::put('company', $company->id, 60 * 24 * 365);
-        \Session::put('name', $company->name, 60 * 24 * 365);
+        Session::put('company', $company->id, 60 * 24 * 365);
+        Session::put('name', $company->name, 60 * 24 * 365);
 
         return redirect('branch');
     }

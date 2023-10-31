@@ -10,7 +10,9 @@ use App\Models\Branch_product;
 use App\Models\Category;
 use App\Models\Unit_measure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
+use Intervention\Image\Facades\Image;
 
 class ProductController extends Controller
 {
@@ -59,6 +61,7 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
+        //dd($request->all());
         $product = new Product();
         $product->category_id = $request->category_id;
         $product->unit_measure_id = $request->unit_measure_id;
@@ -67,7 +70,6 @@ class ProductController extends Controller
         $product->price = $request->price;
         $product->sale_price = $request->sale_price;
         $product->stock = 0;
-
         //Handle File Upload
         if($request->hasFile('image')){
             //Get filename with the extension
@@ -76,14 +78,22 @@ class ProductController extends Controller
             $filename = pathinfo($filenamewithExt,PATHINFO_FILENAME);
             //Get just ext
             $extension = $request->file('image')->guessClientExtension();
+
+            $image = Image::make($request->file('image'))->encode('jpg', 75);
+            $image->resize(512,448,function($constraint) {
+                $constraint->upsize();
+            });
             //FileName to store
-            $fileNameToStore = time().'.'.$extension;
+            $fileNameToStore = time() . '.jpg';
+            $product->imageName = $fileNameToStore;
             //Upload Image
-            $path = $request->file('image')->move('images/products',$fileNameToStore);
-            } else{
-                $fileNameToStore="noimagen.jpg";
-            }
-            $product->image=$fileNameToStore;
+            Storage::disk('public')->put("images/products/$fileNameToStore", $image->stream());
+            $fileNameToStore = Storage::url("images/products/$fileNameToStore");
+        } else{
+            $product->imageName = 'noimage.jpg';
+            $fileNameToStore="/storage/images/products/noimage.jpg";
+        }
+        $product->image=$fileNameToStore;
         $product->save();
             //metodo para agregar producto a la sede
         $branch_product = new Branch_product();
@@ -141,34 +151,47 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProductRequest $request, $id)
+    public function update(UpdateProductRequest $request, Product $product)
     {
-        $product = Product::findOrFail($id);
-        $product = Product::findOrFail($id);
+        //dd($request->all());
         $product->category_id = $request->category_id;
         $product->code = $request->code;
         $product->name = $request->name;
         $product->price = $request->price;
         $product->sale_price = $request->sale_price;
-        $product->stock = $request->stock;
+        $product->stock = $product->stock;
         $product->status = 1;
 
+        $currentImage = $product->imageName;
+        //Handle File Upload
+        $currentImage = $product->imageName;
         //Handle File Upload
         if($request->hasFile('image')){
+            if ($currentImage != 'noimage.jpg') {
+                Storage::disk('public')->delete("images/products/$currentImage");
+            }
             //Get filename with the extension
             $filenamewithExt = $request->file('image')->getClientOriginalName();
             //Get just filename
             $filename = pathinfo($filenamewithExt,PATHINFO_FILENAME);
             //Get just ext
             $extension = $request->file('image')->guessClientExtension();
+
+            $image = Image::make($request->file('image'))->encode('jpg', 75);
+            $image->resize(512,448,function($constraint) {
+                $constraint->upsize();
+            });
             //FileName to store
-            $fileNameToStore = time().'.'.$extension;
+            $fileNameToStore = time() . '.jpg';
+            $product->imageName = $fileNameToStore;
             //Upload Image
-            $path = $request->file('image')->move('images/products',$fileNameToStore);
-            } else{
-                $fileNameToStore="noimagen.jpg";
-            }
-            $product->image=$fileNameToStore;
+            Storage::disk('public')->put("images/products/$fileNameToStore", $image->stream());
+            $fileNameToStore = Storage::url("images/products/$fileNameToStore");
+        } else{
+            $product->imageName = 'noimage.jpg';
+            $fileNameToStore="/storage/images/products/noimage.jpg";
+        }
+        $product->image=$fileNameToStore;
         $product->update();
 
         $branchProduct = Branch_product::where('product_id', $product->id)->first();

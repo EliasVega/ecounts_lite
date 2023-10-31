@@ -99,13 +99,10 @@
             </select>
         </div>
     </div>
-
-
-
-    <div class="col-lg-8 col-md-8 col-sm-10 col-xs-12">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="form-group">
-            <label for="logo">Imagen</label>
-            <input type="file" name="logo" class="form-control" id="logo" value="{{ $company->imagen }}" placeholder="Ingresar Imagen">
+            <label for="logo">Logo</label>
+            <input type="file" id="logo" name="logo" data-initial-preview="{{ old('logo', $company->logo ?? '') }}" accept="image/*" data-msg-placeholder="Seleccionar archivo"/>
         </div>
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

@@ -36,4 +36,8 @@
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('plugins/select2-develop/dist/js/select2.min.js') }}"></script>
 
+<script src="{{ asset('plugins/bootstrap-fileinput/js/fileinput.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('plugins/bootstrap-fileinput/js/locales/es.js') }}" type="text/javascript"></script>
+<script src="{{ asset('plugins/bootstrap-fileinput/themes/fa5/theme.min.js') }}" type="text/javascript"></script>
+
 
