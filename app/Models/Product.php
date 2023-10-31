@@ -14,6 +14,7 @@ class Product extends Model
         'sale_price',
         'stock',
         'status',
+        'imageName',
         'image',
         'category_id',
         'unit_measure_id'

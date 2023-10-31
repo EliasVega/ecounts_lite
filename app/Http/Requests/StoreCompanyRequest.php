@@ -31,6 +31,7 @@ class StoreCompanyRequest extends FormRequest
             'email'           => 'required',
             'emailfe'         => 'required',
             'estado'          => '',
+            'imageName' => '',
             'logo'            => '',
             'department_id'   => 'required',
             'municipality_id' => 'required',

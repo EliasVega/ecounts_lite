@@ -14,6 +14,7 @@ class Company extends Model
         'dv',
         'email',
         'emailfe',
+        'imageName',
         'logo',
         'department_id',
         'municipaliy_id',

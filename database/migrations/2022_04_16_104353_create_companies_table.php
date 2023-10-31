@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('dv', 1);
             $table->string('email', 50)->unique();
             $table->string('emailfe', 50)->unique();
+            $table->string('imageName', 20);
             $table->string('logo', 255)->nullable();
 
             $table->foreignId('department_id')->constrained()->onUpdate('cascade')->ondelete('cascade');
